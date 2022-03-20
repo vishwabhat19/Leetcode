@@ -1,6 +1,6 @@
-package com.streams;
+package com.solutions;
 
-import com.streams.OuterClass.InnerClass;
+import com.solutions.OuterClass.InnerClass;
 
 public class ClassTest {
 

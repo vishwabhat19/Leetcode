@@ -1,4 +1,4 @@
-package com.streams;
+package com.solutions;
 
 import java.util.Collections;
 import java.util.PriorityQueue;

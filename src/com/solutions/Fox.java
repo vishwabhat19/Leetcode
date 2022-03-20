@@ -1,4 +1,4 @@
-package com.streams;
+package com.solutions;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

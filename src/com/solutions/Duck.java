@@ -1,4 +1,4 @@
-package com.streams;
+package com.solutions;
 
 public class Duck {
 
