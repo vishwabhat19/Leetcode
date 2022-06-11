@@ -33,6 +33,7 @@ public class ValidParenthesis
 				stack.push(s.charAt(i));
 			}
 			else {
+				//Stack shouldn't be empty here
 				if(stack.isEmpty()) return false;
 				Character c = stack.pop();
 				switch(currentBracket) {
