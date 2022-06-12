@@ -21,7 +21,7 @@ public class LongestCommonPrefix
 {
 	public static void main(String[] args)
 	{
-		String trs[] = { "dog", "racecar", "car"};
+		String trs[] = { "gee", "geeks", "geeksfor"};
 		System.out.println(longestCommonPrefix(trs));
 	}
 
@@ -34,13 +34,15 @@ public class LongestCommonPrefix
 	}
 
 	public static String prefixUtil(String s1, String s2) {
-		String lcp = "";
+		String lcpIntermediate = "";
 		for(int i=0,j=0;i<s1.length() && j<s2.length();i++,j++) {
-			if(s1.charAt(i)!=s2.charAt(j)) return lcp;
+			if(s1.charAt(i)!=s2.charAt(j)) {
+				break;
+			}
 			else {
-				lcp += s1.charAt(i);
+				lcpIntermediate+= s1.charAt(i);
 			}
 		}
-		return lcp;
+		return lcpIntermediate;
 	}
 }
