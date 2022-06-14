@@ -9,9 +9,9 @@ public class MissingNumber {
     }
 
     private static int missingNumber(int[] nums) {
-        int currentSum = Arrays.stream(nums).sum();
-        int maxNumber = (int)Arrays.stream(nums).count();
-        int expectedSum = maxNumber * (maxNumber + 1) / 2;
-        return (expectedSum - currentSum);
+        int length = nums.length;
+        int expectedSum = length*(length+1)/2;
+        int sum = Arrays.stream(nums).sum();
+        return (expectedSum-sum);
     }
 }
