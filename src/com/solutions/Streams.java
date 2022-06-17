@@ -70,9 +70,11 @@ public class Streams
 		Student s2 = new Student(2, "Rama", 96);
 		Student s3 = new Student(3, "Vishnu", 50);
 		Student s4 = new Student(4, "Krishna", 1000);
+		Student s5 = new Student(3, "Vishwa", 10);
 
-		List<Student> list = Arrays.asList(new Student[]{s1,s2,s3});
-		list.forEach(student -> System.out.println(student.getName()));
+
+		List<Student> list = Arrays.asList(new Student[]{s1,s2,s3,s4,s5});
+
 
 		//Sort the students based on their marks.
 		List<Student> sortedList = list.stream().sorted(Comparator.comparing(Student::getMarks)).collect(Collectors.toList());
@@ -80,9 +82,20 @@ public class Streams
 		sortedList.forEach(student -> System.out.println(student.getName()+" "+student.getMarks()));
 
 		//Filter out duplicate students using Student name
-		Map<String, Student> map1 = list.stream().collect(Collectors.toMap(Student::getName, Function.identity(), (st1,st2) -> st1));
+		Map<String,Student> mapDistinct = list.stream().collect(Collectors.toMap(Student::getName, student -> student, (st1,st2) -> st1));
 		System.out.println("Removing duplicates");
-		map.entrySet().stream().forEach(e -> System.out.println(e.getKey()+" "+e.getValue()));
+		mapDistinct.entrySet().stream().forEach(e -> System.out.println(e.getKey()+" "+e.getValue()));
+
+		//Return the Student with the least marks
+		Student student = list.stream().min(Comparator.comparing(Student::getMarks)).get();
+		System.out.println("The student with minimum mark is: "+student.getName()+" and his marks are: "+student.getMarks());
+
+		//Return the student with highest marks
+		Student studentHighestMarks	 = list.stream().max(Comparator.comparing(Student::getMarks)).get();
+
+		System.out.println("Student with Highest Marks is: "+studentHighestMarks);
+
+
 
 
 	}
