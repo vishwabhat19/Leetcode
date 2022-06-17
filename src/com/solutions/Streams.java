@@ -95,6 +95,11 @@ public class Streams
 
 		System.out.println("Student with Highest Marks is: "+studentHighestMarks);
 
+		//Student with names starting from V
+		List<Student> studentsWithV = list.stream().filter(stu -> stu.getName().charAt(0) == 'V').collect(Collectors.toList());
+
+		studentsWithV.forEach(System.out::println);
+
 
 
 
