@@ -64,13 +64,19 @@ public class Streams
 	public static void main(String[] args)
 	{
 		String s[] = {"batman", "superman", "batman", "batman"};
-		Map<String, Long> map = Arrays.stream(s).collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+		Map<String, Long> map = Arrays.stream(s).collect(Collectors.groupingBy(str -> str, Collectors.counting()));
+		map.entrySet().stream().forEach(System.out::println);
 
-		Student s1 = new Student(1, "Krishna", 100);
-		Student s2 = new Student(2, "Rama", 96);
-		Student s3 = new Student(3, "Vishnu", 50);
-		Student s4 = new Student(4, "Krishna", 1000);
-		Student s5 = new Student(3, "Vishwa", 10);
+		//Remove Duplicates from a array
+		List<String> distinctList = Arrays.stream(s).distinct().collect(Collectors.toList());
+		System.out.println("Distinct List");
+		distinctList.stream().forEach(System.out::println);
+
+		Student s1 = new Student(1, "Krishna", 1);
+		Student s2 = new Student(2, "Rama", 1);
+		Student s3 = new Student(3, "Vishnu", 1);
+		Student s4 = new Student(4, "Krishna", 1);
+		Student s5 = new Student(3, "Vishwa", 1);
 
 
 		List<Student> list = Arrays.asList(new Student[]{s1,s2,s3,s4,s5});
@@ -99,6 +105,13 @@ public class Streams
 		List<Student> studentsWithV = list.stream().filter(stu -> stu.getName().charAt(0) == 'V').collect(Collectors.toList());
 
 		studentsWithV.forEach(System.out::println);
+
+		//Get a total of all the marks in this list
+		int totalMarks = list.stream().mapToInt(Student::getMarks).sum();
+
+
+
+		System.out.println("Total Marks: "+totalMarks);
 
 
 
