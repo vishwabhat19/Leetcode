@@ -64,7 +64,7 @@ public class Streams
 	public static void main(String[] args)
 	{
 		String s[] = {"batman", "superman", "batman", "batman"};
-		Map<String, Long> map = Arrays.stream(s).collect(Collectors.groupingBy(str -> str, Collectors.counting()));
+		Map<String,Long> map = Arrays.stream(s).collect(Collectors.groupingBy(Function.identity(),Collectors.counting()));
 		map.entrySet().stream().forEach(System.out::println);
 
 		//Remove Duplicates from a array
@@ -109,9 +109,14 @@ public class Streams
 		//Get a total of all the marks in this list
 		int totalMarks = list.stream().mapToInt(Student::getMarks).sum();
 
-
-
 		System.out.println("Total Marks: "+totalMarks);
+
+		HashSet<Integer> set = new HashSet<>();
+
+		set.add(1);
+		set.add(2);
+		set.add(1);
+		System.out.println(set);
 
 
 
