@@ -110,9 +110,9 @@ public class Streams
 		int totalMarks = list.stream().mapToInt(Student::getMarks).sum();
 
 		System.out.println("Total Marks: "+totalMarks);
-		
 
-
+		HashSet<Integer> set = new HashSet<>();
+		set.add(1);
 
 
 	}
