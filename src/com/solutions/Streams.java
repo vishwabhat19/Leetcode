@@ -64,9 +64,11 @@ public class Streams
 	public static void main(String[] args)
 	{
 		String s[] = {"batman", "superman", "batman", "batman"};
-		Map<String,Long> map = Arrays.stream(s).collect(Collectors.groupingBy(Function.identity(),Collectors.counting()));
-		map.entrySet().stream().forEach(System.out::println);
 
+		//Count the frequency of each string
+		Map<String, Long> mapResult = Arrays.stream(s).collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+		System.out.println("Frequency: ");
+		mapResult.entrySet().stream().forEach(e -> System.out.println(e.getKey()+" "+e.getValue()));
 		//Remove Duplicates from a array
 		List<String> distinctList = Arrays.stream(s).distinct().collect(Collectors.toList());
 		System.out.println("Distinct List");
@@ -88,7 +90,7 @@ public class Streams
 		sortedList.forEach(student -> System.out.println(student.getName()+" "+student.getMarks()));
 
 		//Filter out duplicate students using Student name
-		Map<String,Student> mapDistinct = list.stream().collect(Collectors.toMap(Student::getName, student -> student, (st1,st2) -> st1));
+		Map<String, Student> mapDistinct = list.stream().collect(Collectors.toMap(Student::getName, Function.identity(), (st1,st2) -> st1));
 		System.out.println("Removing duplicates");
 		mapDistinct.entrySet().stream().forEach(e -> System.out.println(e.getKey()+" "+e.getValue()));
 
@@ -97,12 +99,12 @@ public class Streams
 		System.out.println("The student with minimum mark is: "+student.getName()+" and his marks are: "+student.getMarks());
 
 		//Return the student with highest marks
-		Student studentHighestMarks	 = list.stream().max(Comparator.comparing(Student::getMarks)).get();
+		Student studentHighestMarks = list.stream().max(Comparator.comparing(Student::getMarks)).get();
 
 		System.out.println("Student with Highest Marks is: "+studentHighestMarks);
 
 		//Student with names starting from V
-		List<Student> studentsWithV = list.stream().filter(stu -> stu.getName().charAt(0) == 'V').collect(Collectors.toList());
+		List<Student> studentsWithV = list.stream().filter(st -> st.getName().charAt(0)=='V').collect(Collectors.toList());
 
 		studentsWithV.forEach(System.out::println);
 
