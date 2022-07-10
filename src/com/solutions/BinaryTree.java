@@ -24,6 +24,7 @@ public class BinaryTree
 	}
 
 	static void printPreOrder(TreeNode node) {
+		//Root, Left, Right
 		if(node!=null) {
 			System.out.println(node.key);
 			printPreOrder(node.left);
@@ -31,26 +32,21 @@ public class BinaryTree
 		}
 	}
 
-	/*
-	PostOrder prints left node first then right node and then root node
-	45231
-	 */
 	static void printPostOrder(TreeNode node) {
-		if (node!=null) {
+		//Left, Right, Node
+		if(node!=null) {
 			printPostOrder(node.left);
 			printPostOrder(node.right);
 			System.out.println(node.key);
 		}
 	}
 
-	/*
-	In Order prints left node first then root and then right node
-	 */
-	static void printInOrder(TreeNode root) {
-		if(root!=null) {
-			printInOrder(root.left);
-			System.out.println(root.key);
-			printInOrder(root.right);
+	static void printInOrder(TreeNode node) {
+		//Left, Root, Right
+		if(node!=null) {
+			printInOrder(node.left);
+			System.out.println(node.key);
+			printInOrder(node.right);
 		}
 	}
 }
