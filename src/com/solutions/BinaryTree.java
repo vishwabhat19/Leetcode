@@ -49,6 +49,22 @@ public class BinaryTree
 		}
 	}
 
+	/*
+	Given the root of a binary tree, invert the tree, and return its root.
+	 */
+	public TreeNode invertTree(TreeNode root) {
+		if(root == null) return null;
+
+		TreeNode left = invertTree(root.left);
+		TreeNode right = invertTree(root.right);
+
+		root.right = left;
+		root.left = right;
+
+		return root;
+		
+	}
+
 	static void printPostOrder(TreeNode node) {
 		//Left, Right, Node
 		if(node!=null) {
