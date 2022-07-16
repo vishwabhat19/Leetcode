@@ -1,5 +1,8 @@
 package com.solutions;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class BinaryTree
 {
 	TreeNode root;
@@ -32,12 +35,8 @@ public class BinaryTree
 		tree.root.right = new TreeNode(3);
 		tree.root.left.left = new TreeNode(4);
 		tree.root.left.right = new TreeNode(5);
-		System.out.println("In Order");
-		printInOrder(tree.root);
-		System.out.println("Post Order");
-		printPostOrder(tree.root);
-		System.out.println("Pre Order");
-		printPreOrder(tree.root);
+		System.out.println("Level Order Traversal");
+		levelOrderTraversal(tree.root);
 	}
 
 	static void printPreOrder(TreeNode node) {
@@ -80,6 +79,19 @@ public class BinaryTree
 			printInOrder(node.left);
 			System.out.println(node.key);
 			printInOrder(node.right);
+		}
+	}
+
+	static Queue<TreeNode> queue = new LinkedList<>();
+	static void levelOrderTraversal(TreeNode node) {
+		queue.offer(node);
+		while(!queue.isEmpty()) {
+			for(int i =0;i< queue.size();i++) {
+				TreeNode firstNode = queue.poll();
+				if(firstNode.left!=null) queue.offer(firstNode.left);
+				if(firstNode.right!=null) queue.offer(firstNode.right);
+				System.out.println(firstNode.key);
+			}
 		}
 	}
 }
