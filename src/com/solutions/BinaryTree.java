@@ -33,10 +33,10 @@ public class BinaryTree
 		tree.root = new TreeNode(1);
 		tree.root.left = new TreeNode(2);
 		tree.root.right = new TreeNode(3);
-		tree.root.left.left = new TreeNode(4);
-		tree.root.left.right = new TreeNode(5);
+		tree.root.left.right = new TreeNode(4);
+		tree.root.right.right = new TreeNode(5);
 		System.out.println("Level Order Traversal");
-		levelOrderTraversal(tree.root);
+		System.out.println(areCousins(tree.root, 4,5));
 	}
 
 	static void printPreOrder(TreeNode node) {
@@ -86,12 +86,61 @@ public class BinaryTree
 	static void levelOrderTraversal(TreeNode node) {
 		queue.offer(node);
 		while(!queue.isEmpty()) {
-			for(int i =0;i< queue.size();i++) {
+			for(int i=0; i<queue.size();i++) {
 				TreeNode firstNode = queue.poll();
 				if(firstNode.left!=null) queue.offer(firstNode.left);
 				if(firstNode.right!=null) queue.offer(firstNode.right);
 				System.out.println(firstNode.key);
 			}
 		}
+	}
+
+	static boolean areCousins(TreeNode root, int x, int y) {
+		if(root == null) return false;
+		queue.offer(root);
+		while(!queue.isEmpty()) {
+			int size = queue.size();
+			boolean xPresent = false;
+			boolean yPresent = false;
+			for(int i=0;i<size;i++) {
+
+				TreeNode currentNode = queue.poll();
+				if(currentNode.key == x) xPresent = true;
+				if(currentNode.key == y) yPresent = true;
+				if(currentNode.left!=null) queue.offer(currentNode.left);
+				if(currentNode.right!=null) queue.offer(currentNode.right);
+				if(xPresent && yPresent) return true;
+			}
+		}
+		return false;
+	}
+
+	public static boolean isSameTree(TreeNode p, TreeNode q) {
+		if(p==null && q==null) return true;
+		if(p == null) return false;
+		if(q == null) return false;
+		Queue<TreeNode> queue1 = new LinkedList();
+		Queue<TreeNode> queue2 = new LinkedList();
+		queue1.offer(p);
+		queue2.offer(q);
+		while(!queue1.isEmpty()) {
+			int size = queue1.size();
+			for(int i=0;i<size;i++) {
+				TreeNode currentNode1 = queue1.poll();
+				TreeNode currentNode2 = queue2.poll();
+				if(currentNode1.key != currentNode2.key) return false;
+				if(currentNode1.left==null && currentNode2.left!=null) return false;
+				if(currentNode2.left==null && currentNode1.left!=null) return false;
+				if(currentNode1.right==null && currentNode2.right!=null) return false;
+				if(currentNode2.right==null && currentNode2.right!=null) return false;
+				if(currentNode1.left!=null) queue1.offer(currentNode1.left);
+				if(currentNode2.left!=null) queue2.offer(currentNode2.left);
+				if(currentNode1.right!=null) queue1.offer(currentNode1.right);
+				if(currentNode2.right!=null) queue2.offer(currentNode2.right);
+				if(queue1.isEmpty() && !queue2.isEmpty()) return false;
+				if(queue2.isEmpty() && !queue1.isEmpty()) return false;
+			}
+		}
+		return true;
 	}
 }
