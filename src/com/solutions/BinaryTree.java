@@ -107,6 +107,16 @@ public class BinaryTree
 				TreeNode currentNode = queue.poll();
 				if(currentNode.key == x) xPresent = true;
 				if(currentNode.key == y) yPresent = true;
+				//Same Parent check starts
+				if(currentNode.left!=null && currentNode.right!=null) {
+					if(currentNode.left.key == x && currentNode.right.key == y) {
+						return false;
+					}
+					if(currentNode.left.key == y && currentNode.right.key == x) {
+						return false;
+					}
+				}
+				//Same Parent check ends
 				if(currentNode.left!=null) queue.offer(currentNode.left);
 				if(currentNode.right!=null) queue.offer(currentNode.right);
 				if(xPresent && yPresent) return true;
