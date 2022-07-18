@@ -165,4 +165,22 @@ public class BinaryTree
 		if(leftDepth > rightDepth) return leftDepth + 1;
 		return rightDepth +1;
 	}
+
+	//Finding diameter of a Binary Tree
+
+	public static int diameter(TreeNode root) {
+		if(root == null) return 0;
+		int leftHeight = height(root.left);
+		int rightHeight = height(root.right);
+		int leftDiameter = height(root.left);
+		int rightDiameter = height(root.right);
+		return Math.max((leftHeight+rightHeight), Math.max(leftDiameter, rightDiameter));
+	}
+
+	static int height(TreeNode root) {
+		if(root==null) return 0;
+		int leftHeight = height(root.left);
+		int rightHeight = height(root.right);
+		return Math.max(leftHeight, rightHeight);
+	}
 }
