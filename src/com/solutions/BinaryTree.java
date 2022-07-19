@@ -1,6 +1,8 @@
 package com.solutions;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class BinaryTree
@@ -182,5 +184,24 @@ public class BinaryTree
 		int leftHeight = height(root.left);
 		int rightHeight = height(root.right);
 		return Math.max(leftHeight, rightHeight);
+	}
+
+
+	//We will do this using DFS - Depth First
+	static List<String> binaryTreePaths(TreeNode root) {
+		List<String> result = new ArrayList<>();
+		if(root==null) return result;
+		String currentPath = Integer.toString(root.key);
+		if(root.left==null && root.right==null) result.add(currentPath);
+		if(root.left!=null) dfs(root.left, currentPath, result);
+		if(root.right!=null) dfs(root.right, currentPath, result);
+		return result;
+	}
+
+	static void dfs(TreeNode node, String currentPath, List<String> result) {
+		currentPath+= "->" + node.key;
+		if(node.left==null && node.right==null) {
+			result.add(currentPath);
+		}
 	}
 }
