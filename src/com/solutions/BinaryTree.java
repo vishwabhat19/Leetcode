@@ -32,13 +32,12 @@ public class BinaryTree
 	public static void main(String[] args)
 	{
 		BinaryTree tree = new BinaryTree();
-		tree.root = new TreeNode(1);
-		tree.root.left = new TreeNode(2);
-		tree.root.right = new TreeNode(3);
-		tree.root.left.right = new TreeNode(4);
-		tree.root.right.right = new TreeNode(5);
-		System.out.println("Level Order Traversal");
-		System.out.println(areCousins(tree.root, 4,5));
+		tree.root = new TreeNode(3);
+		tree.root.left = new TreeNode(9);
+		tree.root.right = new TreeNode(20);
+		tree.root.right.left = new TreeNode(15);
+		tree.root.right.right = new TreeNode(7);
+		System.out.println(averageOfLevels(tree.root));
 	}
 
 	static void printPreOrder(TreeNode node) {
@@ -203,5 +202,26 @@ public class BinaryTree
 		if(node.left==null && node.right==null) {
 			result.add(currentPath);
 		}
+	}
+
+	//Find the averages of levels in a binary tree
+	static Queue<TreeNode> queueAverage = new LinkedList<>();
+	public static List<Double> averageOfLevels(TreeNode root) {
+		List<Double> averages = new ArrayList<>();
+		queueAverage.offer(root);
+		while(!queueAverage.isEmpty()) {
+			Double sum = 0.0;
+			int size = queueAverage.size();
+			for(int i=0;i<size;i++) {
+				TreeNode currentNode = queueAverage.poll();
+				sum+=currentNode.key;
+				if(currentNode.left!=null) queueAverage.offer(currentNode.left);
+				if(currentNode.right!=null) queueAverage.offer(currentNode.right);
+			}
+			averages.add(sum/size);
+		}
+		System.out.println("Averages:");
+		averages.forEach(System.out::println);
+		return averages;
 	}
 }
