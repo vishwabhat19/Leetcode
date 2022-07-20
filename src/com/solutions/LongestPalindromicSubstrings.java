@@ -1,2 +1,5 @@
-package com.solutions;public class LongestPalindromicSubstrings {
+package com.solutions;
+
+public class LongestPalindromicSubstrings
+{
 }

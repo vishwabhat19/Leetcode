@@ -31,16 +31,21 @@ public class ReverseOnlyLetters
 		System.out.println(reverseOnlyLetters(c));
 	}
 
-	public static String reverseOnlyLetters(char[]	 s) {
+	public static String reverseOnlyLetters(char[] s)
+	{
 		int leftIndex = 0, rightIndex = s.length - 1;
-		while(leftIndex < rightIndex) {
-			if(!Character.isAlphabetic(s[leftIndex])) {
+		while (leftIndex < rightIndex)
+		{
+			if (!Character.isAlphabetic(s[leftIndex]))
+			{
 				leftIndex++;
 			}
-			else if(!Character.isAlphabetic(s[rightIndex])) {
+			else if (!Character.isAlphabetic(s[rightIndex]))
+			{
 				rightIndex--;
 			}
-			else {
+			else
+			{
 				char temp = s[leftIndex];
 				s[leftIndex] = s[rightIndex];
 				s[rightIndex] = temp;

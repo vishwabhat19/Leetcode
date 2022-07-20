@@ -3,36 +3,51 @@ package com.solutions;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-class GoodFood{}
-class GoodWater{}
+class GoodFood
+{
+}
+
+class GoodWater
+{
+}
+
 public class Lion
 {
 
-	public void eatAndDrink(GoodFood food, GoodWater water) {
-		synchronized (food) {
+	public void eatAndDrink(GoodFood food, GoodWater water)
+	{
+		synchronized (food)
+		{
 			System.out.println("Got Food!");
 			move();
-			synchronized (water) {
+			synchronized (water)
+			{
 				System.out.println("Got Water!");
 			}
 		}
 	}
 
-	public void drinkAndEat(GoodFood food, GoodWater water) {
-		synchronized (water) {
+	public void drinkAndEat(GoodFood food, GoodWater water)
+	{
+		synchronized (water)
+		{
 			System.out.println("Got Water!");
 			move();
-			synchronized (food) {
+			synchronized (food)
+			{
 				System.out.println("Got Food");
 			}
 		}
 	}
 
-	public void move() {
-		try {
+	public void move()
+	{
+		try
+		{
 			Thread.sleep(100);
 		}
-		catch (InterruptedException e) {
+		catch (InterruptedException e)
+		{
 			e.printStackTrace();
 		}
 	}
@@ -48,12 +63,13 @@ public class Lion
 		try
 		{
 			service = Executors.newScheduledThreadPool(10);
-			service.submit(() -> lion1.eatAndDrink(food,water));
-			service.submit(() -> lion2.drinkAndEat(food,water));
+			service.submit(() -> lion1.eatAndDrink(food, water));
+			service.submit(() -> lion2.drinkAndEat(food, water));
 		}
 		finally
 		{
-			if(service!=null) service.shutdown();
+			if (service != null)
+				service.shutdown();
 		}
 	}
 }

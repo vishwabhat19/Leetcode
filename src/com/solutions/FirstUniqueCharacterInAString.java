@@ -27,33 +27,41 @@ public class FirstUniqueCharacterInAString
 		System.out.println(firstUniqChar(s));
 	}
 
-	public static int firstUniqChar(String s) {
+	public static int firstUniqChar(String s)
+	{
 		int arr[] = new int[256];
 
-		for(int i =0;i<arr.length;i++) {
+		for (int i = 0; i < arr.length; i++)
+		{
 			arr[i] = -1;
 		}
 
-		for(int i=0;i<s.length();i++) {
-			if(arr[s.charAt(i)] == -1) {
+		for (int i = 0; i < s.length(); i++)
+		{
+			if (arr[s.charAt(i)] == -1)
+			{
 				arr[s.charAt(i)] = i;
 			}
-			else {
+			else
+			{
 				arr[s.charAt(i)] = -2;
 			}
 		}
 
 		int min = Integer.MAX_VALUE;
-		for(int i=0;i<arr.length;i++) {
-			if(arr[i]>=0) {
-				min = Math.min(min,arr[i]);
+		for (int i = 0; i < arr.length; i++)
+		{
+			if (arr[i] >= 0)
+			{
+				min = Math.min(min, arr[i]);
 			}
 		}
-		if(min == Integer.MAX_VALUE) {
+		if (min == Integer.MAX_VALUE)
+		{
 			return -1;
 		}
-		else return min;
+		else
+			return min;
 	}
-
 
 }

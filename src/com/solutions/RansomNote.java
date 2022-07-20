@@ -17,31 +17,41 @@ public class RansomNote
 		String ransomNote = "aa", magazine = "aab";
 		System.out.println(canConstruct(ransomNote, magazine));
 	}
-	public static boolean canConstruct(String ransomNote, String magazine) {
+
+	public static boolean canConstruct(String ransomNote, String magazine)
+	{
 		HashMap<Character, Integer> map = new HashMap<>();
-		for(int i=0;i<magazine.length();i++) {
-			if(map.containsKey(magazine.charAt(i))) {
+		for (int i = 0; i < magazine.length(); i++)
+		{
+			if (map.containsKey(magazine.charAt(i)))
+			{
 				int count = map.get(magazine.charAt(i));
 				count++;
 				map.put(magazine.charAt(i), count);
 			}
-			else {
+			else
+			{
 				map.put(magazine.charAt(i), 1);
 			}
 		}
 
-		for(int i=0;i<ransomNote.length();i++) {
-			if(map.containsKey(ransomNote.charAt(i))) {
+		for (int i = 0; i < ransomNote.length(); i++)
+		{
+			if (map.containsKey(ransomNote.charAt(i)))
+			{
 				int count = map.get(ransomNote.charAt(i));
-				count --;
-				if (count == 0) {
+				count--;
+				if (count == 0)
+				{
 					map.remove(ransomNote.charAt(i));
 				}
-				else {
+				else
+				{
 					map.put(ransomNote.charAt(i), count);
 				}
 			}
-			else {
+			else
+			{
 				return false;
 			}
 		}

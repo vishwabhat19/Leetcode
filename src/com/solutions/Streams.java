@@ -8,7 +8,8 @@ import java.util.stream.Collectors;
 Use Streams to output the frequency of each String
  */
 
-class Student {
+class Student
+{
 	Integer studentId;
 	String name;
 	Integer marks;
@@ -59,16 +60,17 @@ class Student {
 				'}';
 	}
 }
+
 public class Streams
 {
 	public static void main(String[] args)
 	{
-		String s[] = {"batman", "superman", "batman", "batman"};
+		String s[] = { "batman", "superman", "batman", "batman" };
 
 		//Count the frequency of each string
 		Map<String, Long> mapResult = Arrays.stream(s).collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 		System.out.println("Frequency: ");
-		mapResult.entrySet().stream().forEach(e -> System.out.println(e.getKey()+" "+e.getValue()));
+		mapResult.entrySet().stream().forEach(e -> System.out.println(e.getKey() + " " + e.getValue()));
 		//Remove Duplicates from a array
 		List<String> distinctList = Arrays.stream(s).distinct().collect(Collectors.toList());
 		System.out.println("Distinct List");
@@ -80,42 +82,49 @@ public class Streams
 		Student s4 = new Student(4, "Krishna", 1);
 		Student s5 = new Student(3, "Vishwa", 1);
 
-
-		List<Student> list = Arrays.asList(new Student[]{s1,s2,s3,s4,s5});
-
+		List<Student> list = Arrays.asList(new Student[] { s1, s2, s3, s4, s5 });
 
 		//Sort the students based on their marks.
 		List<Student> sortedList = list.stream().sorted(Comparator.comparing(Student::getMarks)).collect(Collectors.toList());
+		//List<Student> sortedList = list.stream().sorted(Comparator.comparing(Student::getMarks)).collect(Collectors.toList());
 		System.out.println("Sorted List by Marks");
-		sortedList.forEach(student -> System.out.println(student.getName()+" "+student.getMarks()));
+		sortedList.forEach(student -> System.out.println(student.getName() + " " + student.getMarks()));
 
 		//Filter out duplicate students using Student name
 		Map<String, Student> mapDistinct = list.stream().collect(Collectors.toMap(Student::getName, Function.identity(), (st1,st2) -> st1));
+		//Map<String, Student> mapDistinct = list.stream().collect(Collectors.toMap(Student::getName, Function.identity(), (st1, st2) -> st1));
 		System.out.println("Removing duplicates");
-		mapDistinct.entrySet().stream().forEach(e -> System.out.println(e.getKey()+" "+e.getValue()));
+		mapDistinct.entrySet().stream().forEach(e -> System.out.println(e.getKey() + " " + e.getValue()));
 
 		//Return the Student with the least marks
 		Student student = list.stream().min(Comparator.comparing(Student::getMarks)).get();
-		System.out.println("The student with minimum mark is: "+student.getName()+" and his marks are: "+student.getMarks());
+		//Student student = list.stream().min(Comparator.comparing(Student::getMarks)).get();
+		System.out.println("The student with minimum mark is: " + student.getName() + " and his marks are: " + student.getMarks());
 
 		//Return the student with highest marks
 		Student studentHighestMarks = list.stream().max(Comparator.comparing(Student::getMarks)).get();
+		//Student studentHighestMarks = list.stream().max(Comparator.comparing(Student::getMarks)).get();
 
-		System.out.println("Student with Highest Marks is: "+studentHighestMarks);
+		System.out.println("Student with Highest Marks is: " + studentHighestMarks);
 
 		//Student with names starting from V
-		List<Student> studentsWithV = list.stream().filter(st -> st.getName().charAt(0)=='V').collect(Collectors.toList());
+		List<Student> studentsWithV = list.stream().filter(stt->stt.getName().charAt(0)=='V').collect(Collectors.toList());
+		//List<Student> studentsWithV = list.stream().filter(st -> st.getName().charAt(0) == 'V').collect(Collectors.toList());
 
 		studentsWithV.forEach(System.out::println);
 
 		//Get a total of all the marks in this list
-		int totalMarks = list.stream().mapToInt(Student::getMarks).sum();
+		int totalMarks = list.stream().mapToInt((Student::getMarks)).sum();
+		//int totalMarks = list.stream().mapToInt(Student::getMarks).sum();
 
-		System.out.println("Total Marks: "+totalMarks);
+		//Get the average of all the marks in the list
+		double averageMarks = list.stream().mapToInt(Student::getMarks).average().getAsDouble();
+		System.out.println("Average Marks: "+averageMarks);
+
+		System.out.println("Total Marks: " + totalMarks);
 
 		HashSet<Integer> set = new HashSet<>();
 		set.add(1);
-
 
 	}
 }

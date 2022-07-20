@@ -18,35 +18,44 @@ public class ValidParenthesis
 {
 	public static void main(String[] args)
 	{
-		String  s = "(){}}{";
+		String s = "(){}}{";
 		System.out.println(isValid(s));
 	}
 
 	public static boolean isValid(String s)
 	{
-		if(s == null || s.isEmpty() || s.charAt(0) == '}' || s.charAt(0) == ']' || s.charAt(0) == ')') return false;
+		if (s == null || s.isEmpty() || s.charAt(0) == '}' || s.charAt(0) == ']' || s.charAt(0) == ')')
+			return false;
 		Deque<Character> stack = new ArrayDeque<>();
 		//Check for opening brackets
-		for(int i=0;i<s.length();i++) {
+		for (int i = 0; i < s.length(); i++)
+		{
 			Character currentBracket = s.charAt(i);
-			if(currentBracket == '{' || currentBracket =='[' || currentBracket == '(') {
+			if (currentBracket == '{' || currentBracket == '[' || currentBracket == '(')
+			{
 				stack.push(s.charAt(i));
 			}
-			else {
+			else
+			{
 				//Stack shouldn't be empty here
-				if(stack.isEmpty()) return false;
+				if (stack.isEmpty())
+					return false;
 				Character c = stack.pop();
-				switch(currentBracket) {
-					case '}' : if(c == '[' || c == '(')
-						return false;
+				switch (currentBracket)
+				{
+					case '}':
+						if (c == '[' || c == '(')
+							return false;
 						break;
 
-					case ')' : if(c == '{' || c == '[')
-						return false;
+					case ')':
+						if (c == '{' || c == '[')
+							return false;
 						break;
 
-					case ']' : if(c == '{' || c == '(')
-						return false;
+					case ']':
+						if (c == '{' || c == '(')
+							return false;
 						break;
 
 				}

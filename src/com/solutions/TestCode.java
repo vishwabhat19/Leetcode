@@ -28,26 +28,35 @@ public class TestCode
 		Employee e4 = new Employee("ijk", "JK", 10000);
 		Employee e5 = new Employee("lmn", "JK", 4000);
 
-
-		List<Employee> list = Arrays.asList(new Employee[]{e1,e2,e3, e4, e5});
+		List<Employee> list = Arrays.asList(new Employee[] { e1, e2, e3, e4, e5 });
 
 		Employee resultEmployee = list.stream().max(Comparator.comparing(Employee::getSalary)).get();
 
-		System.out.println("Employee with the highest salary is: "+resultEmployee);
+		//Employee resultEmployee = list.stream().max(Comparator.comparing(Employee::getSalary)).get();
+
+		System.out.println("Employee with the highest salary is: " + resultEmployee);
 
 		System.out.println("Incremented Salaries");
-		List<Employee> finalList = list.stream().filter(emp -> emp.getState().equalsIgnoreCase("JK")).map(e -> new Employee(e.getName(), e.getState(),e.getSalary()+2000)).collect(Collectors.toList());
+		List<Employee> finalList = list.stream().filter(em -> em.getState().equalsIgnoreCase("JK")).map(emp -> new Employee(emp.getName(), emp.getState(), emp.getSalary()+2000)).collect(Collectors.toList());
+
+
+		//List<Employee> finalList = list.stream().filter(emp -> emp.getState().equalsIgnoreCase("JK")).map(e -> new Employee(e.getName(), e.getState(), e.getSalary() + 2000)).collect(Collectors.toList());
 		finalList.forEach(System.out::println);
 		//Map with state and list of persons belonging to a particular state
 
 		Map<String, List<Employee>> mapByState = list.stream().collect(Collectors.groupingBy(Employee::getState));
 		mapByState.entrySet().stream().forEach(System.out::println);
-	}
 
+		//Count the number of employees in different states
+		Map<String, Long> employeesInStateCount = list.stream().collect(Collectors.groupingBy(Employee::getState, Collectors.counting()));
+		System.out.println("Count of employees in each state: ");
+		employeesInStateCount.entrySet().stream().forEach(System.out::println);
+	}
 
 }
 
-class Employee {
+class Employee
+{
 
 	private String name;
 	private String state;

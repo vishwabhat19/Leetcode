@@ -1,11 +1,15 @@
-package com.testcode;public class Testing {
+package com.testcode;
+
+public class Testing
+{
 
 	public static void main(String[] args)
 	{
-		print("a",1);
+		print("a", 1);
 	}
 
-	static void print(String s, int... argss) {
+	static void print(String s, int... argss)
+	{
 		System.out.println(argss[0]);
 	}
 }

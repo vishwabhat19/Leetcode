@@ -1,2 +1,5 @@
-package com.solutions;public class SearchTwoDMatrix {
+package com.solutions;
+
+public class SearchTwoDMatrix
+{
 }

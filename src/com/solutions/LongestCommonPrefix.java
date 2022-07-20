@@ -21,26 +21,32 @@ public class LongestCommonPrefix
 {
 	public static void main(String[] args)
 	{
-		String trs[] = { "gee", "geeks", "geeksfor"};
+		String trs[] = { "gee", "geeks", "geeksfor" };
 		System.out.println(longestCommonPrefix(trs));
 	}
 
-	public static String longestCommonPrefix(String[] strs) {
+	public static String longestCommonPrefix(String[] strs)
+	{
 		String lcp = strs[0];
-		for(int i=1;i<strs.length;i++) {
-			lcp = prefixUtil(lcp,strs[i]);
+		for (int i = 1; i < strs.length; i++)
+		{
+			lcp = prefixUtil(lcp, strs[i]);
 		}
 		return lcp;
 	}
 
-	public static String prefixUtil(String s1, String s2) {
+	public static String prefixUtil(String s1, String s2)
+	{
 		String lcpIntermediate = "";
-		for(int i=0,j=0;i<s1.length() && j<s2.length();i++,j++) {
-			if(s1.charAt(i)!=s2.charAt(j)) {
+		for (int i = 0, j = 0; i < s1.length() && j < s2.length(); i++, j++)
+		{
+			if (s1.charAt(i) != s2.charAt(j))
+			{
 				break;
 			}
-			else {
-				lcpIntermediate+= s1.charAt(i);
+			else
+			{
+				lcpIntermediate += s1.charAt(i);
 			}
 		}
 		return lcpIntermediate;

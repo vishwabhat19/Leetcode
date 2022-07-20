@@ -1,23 +1,29 @@
 package com.solutions;
 
-public class ReverseInteger {
-    
-    public static void main(String[] args) {
-        System.out.println("Reverse String is: "+reverse(-326));
-    }
+public class ReverseInteger
+{
 
-    private static Integer reverse(int i) {
-        
-        if(i == 0) return 0;
+	public static void main(String[] args)
+	{
+		System.out.println("Reverse String is: " + reverse(-326));
+	}
 
-        long answer = 0;
+	private static Integer reverse(int i)
+	{
 
-        while( i != 0 ) {
-            answer = answer * 10 + i % 10;
-           i = i/10;
-        }
+		if (i == 0)
+			return 0;
 
-        if(answer > Integer.MAX_VALUE || answer < Integer.MIN_VALUE) return 0;
-        return (int)answer;
-    }
+		long answer = 0;
+
+		while (i != 0)
+		{
+			answer = answer * 10 + i % 10;
+			i = i / 10;
+		}
+
+		if (answer > Integer.MAX_VALUE || answer < Integer.MIN_VALUE)
+			return 0;
+		return (int)answer;
+	}
 }

@@ -25,17 +25,22 @@ public class PangramChecking
 		System.out.println(checkIfPangram(sentence));
 	}
 
-	public static boolean checkIfPangram(String sentence) {
+	public static boolean checkIfPangram(String sentence)
+	{
 		boolean mark[] = new boolean[26];
-		for(int i=0;i<sentence.length();i++) {
+		for (int i = 0; i < sentence.length(); i++)
+		{
 			int index = 0;
-			if(sentence.charAt(i) >='a' && sentence.charAt(i)<='z') {
+			if (sentence.charAt(i) >= 'a' && sentence.charAt(i) <= 'z')
+			{
 				index = sentence.charAt(i) - 'a';
 			}
 			mark[index] = true;
 		}
-		for(int i=0;i<mark.length;i++) {
-			if(mark[i] == false) return false;
+		for (int i = 0; i < mark.length; i++)
+		{
+			if (mark[i] == false)
+				return false;
 		}
 		return true;
 	}
