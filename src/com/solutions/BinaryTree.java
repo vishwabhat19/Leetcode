@@ -41,7 +41,8 @@ public class BinaryTree
 		tree.root.right = new TreeNode(20);
 		tree.root.right.left = new TreeNode(15);
 		tree.root.right.right = new TreeNode(7);
-		System.out.println(averageOfLevels(tree.root));
+		findLeafSequence(tree.root);
+		list1.forEach(System.out::println);
 	}
 
 	static void printPreOrder(TreeNode node)
@@ -308,5 +309,120 @@ Note: The merging process must start from the root nodes of both trees.
 		root.left = mergeTrees(root1.left, root2.left);
 		root.right = mergeTrees(root1.right, root2.right);
 		return root;
+	}
+
+	/*
+	Given the roots of two binary trees p and q, write a function to check if they are the same or not.
+
+Two binary trees are considered the same if they are structurally identical, and the nodes have the same value.
+	 */
+
+
+	public static boolean sameTree(TreeNode p, TreeNode q) {
+		//Check if both are equal to null. If yes, then its the same tree
+		if(p == null && q == null) return true;
+		/*
+		The OR condition below when see in combination with the above statement will return true only when one of the nodes are null.
+		This is because if both were null then the above AND condition itself would have got satisfied.
+		 */
+		if(p == null || q == null) return false;
+		//Check if the values of the current nodes are equal
+		if(p.key == q.key) {
+			//Now if both the values are equal then check for the left and right subtrees recursively
+			return sameTree(p.left, q.left) && sameTree(p.right, q.right);
+		}
+		else {
+			//If the values are different in the current node itself, then no need to compare further. Return false from here itself
+			return false;
+		}
+	}
+
+	/*
+	Alternate solution
+	 public boolean isSameTree(TreeNode p, TreeNode q) {
+        if(p==null && q==null) return true;
+        if(p == null) return false;
+        if(q == null) return false;
+        Queue<TreeNode> queue1 = new LinkedList();
+        Queue<TreeNode> queue2 = new LinkedList();
+        queue1.offer(p);
+        queue2.offer(q);
+        while(!queue1.isEmpty()) {
+            int size = queue1.size();
+            for(int i=0;i<size;i++) {
+                TreeNode currentNode1 = queue1.poll();
+                TreeNode currentNode2 = queue2.poll();
+                if(currentNode1.val != currentNode2.val) return false;
+                if(currentNode1.left==null && currentNode2.left!=null) return false;
+                if(currentNode2.left==null && currentNode1.left!=null) return false;
+                if(currentNode1.right==null && currentNode2.right!=null) return false;
+                if(currentNode2.right==null && currentNode2.right!=null) return false;
+                if(currentNode1.left!=null) queue1.offer(currentNode1.left);
+                if(currentNode2.left!=null) queue2.offer(currentNode2.left);
+                if(currentNode1.right!=null) queue1.offer(currentNode1.right);
+                if(currentNode2.right!=null) queue2.offer(currentNode2.right);
+                if(queue1.isEmpty() && !queue2.isEmpty()) return false;
+                if(queue2.isEmpty() && !queue1.isEmpty()) return false;
+            }
+        }
+        return true;
+    }
+	 */
+
+	/*
+	Sum of Left Leaves
+	Given the root of a binary tree, return the sum of all left leaves.
+
+A leaf is a node with no children. A left leaf is a leaf that is the left child of another node.
+	 */
+	public static int sumOfLeftLeaves(TreeNode root) {
+		if(root == null) return 0;
+		if(root.left!=null && root.left.left==null && root.left.right==null)
+			return root.left.key + sumOfLeftLeaves(root.right);
+		else
+			return sumOfLeftLeaves(root.left) + sumOfLeftLeaves(root.right);
+	}
+
+	/*
+	Consider all the leaves of a binary tree, from left to right order, the values of those leaves form a leaf value sequence.
+
+For example, in the given tree above, the leaf value sequence is (6, 7, 4, 9, 8).
+
+Two binary trees are considered leaf-similar if their leaf value sequence is the same.
+
+Return true if and only if the two given trees with head nodes root1 and root2 are leaf-similar.
+	 */
+
+
+
+	static List<Integer> list1 = new ArrayList<>();
+	public static void findLeafSequence(TreeNode root) {
+		if(root == null) return;
+		if(root.left==null && root.right==null) {
+			list1.add(root.key);
+		}
+		else {
+			findLeafSequence(root.left);
+			findLeafSequence(root.right);
+		}
+	}
+
+	/*
+	Given the root of a binary tree, check whether it is a mirror of itself (i.e., symmetric around its center).
+	 */
+	public static boolean isSymmetric(TreeNode root) {
+		if(root == null) return true;
+		return isSymmetric(root.left,root.right);
+	}
+
+	public static boolean isSymmetric(TreeNode left, TreeNode right) {
+		if(left==null && right==null) return true;
+		if(left==null || right ==null) return false;
+		if(left.key != right.key) return false;
+		if(!isSymmetric(left.left, right.right))
+			return false;
+		if(!isSymmetric(left.right, right.left))
+			return false;
+		return true;
 	}
 }
