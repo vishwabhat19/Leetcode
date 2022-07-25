@@ -441,25 +441,34 @@ Return true if and only if the two given trees with head nodes root1 and root2 a
 		return sum;
 	}
 
-	static TreeNode resultNode;
+	/*
+	700. Search in a Binary Search Tree
+	 */
 	public static TreeNode searchBST(TreeNode root, int val) {
-		TreeNode result = null;
-		if(root == null) return null;
-		if(root.key == val) return root;
-		if(root.left!=null) search(root.left, val);
-		if(resultNode == null) {
-			if(root.right!=null) search(root.right, val);
-		}
-		return resultNode;
+		if(root == null || root.key == val) return root;
+		if(val > root.key) return searchBST(root.right, val);
+		else return searchBST(root.left, val);
 	}
 
-	public static void search(TreeNode root, int val) {
-		if(root == null) return;
-		if(root.key == val) {
-			resultNode = root;
-			return;
+	/*
+	530. Minimum Absolute Difference in BST
+	 */
+
+	static Integer ans;
+	static TreeNode prev;
+	public static int getMinimumDifference(TreeNode root) {
+		prev = null;
+		ans = Integer.MAX_VALUE;
+		inOrder(root);
+		return ans;
+	}
+
+	public static void inOrder(TreeNode curr) {
+		if(curr == null) return;
+		if(prev!=null) {
+			ans = Math.min(ans, curr.key - prev.key);
 		}
-		search(root.left, val);
-		search(root.right, val);
+		prev = curr;
+		inOrder(curr.right);
 	}
 }
