@@ -36,12 +36,13 @@ public class BinaryTree
 	public static void main(String[] args)
 	{
 		BinaryTree tree = new BinaryTree();
-		tree.root = new TreeNode(3);
-		tree.root.left = new TreeNode(9);
-		tree.root.right = new TreeNode(20);
-		tree.root.right.left = new TreeNode(15);
-		tree.root.right.right = new TreeNode(7);
-		findLeafSequence(tree.root);
+		tree.root = new TreeNode(4);
+		tree.root.left = new TreeNode(2);
+		tree.root.right = new TreeNode(7);
+		tree.root.left.left = new TreeNode(1);
+		tree.root.left.right = new TreeNode(3);
+		searchBST(tree.root, 5);
+		printPreOrder(resultNode);
 		list1.forEach(System.out::println);
 	}
 
@@ -438,5 +439,27 @@ Return true if and only if the two given trees with head nodes root1 and root2 a
 		rangeSum(root.left, low, high);
 		rangeSum(root.right, low, high);
 		return sum;
+	}
+
+	static TreeNode resultNode;
+	public static TreeNode searchBST(TreeNode root, int val) {
+		TreeNode result = null;
+		if(root == null) return null;
+		if(root.key == val) return root;
+		if(root.left!=null) search(root.left, val);
+		if(resultNode == null) {
+			if(root.right!=null) search(root.right, val);
+		}
+		return resultNode;
+	}
+
+	public static void search(TreeNode root, int val) {
+		if(root == null) return;
+		if(root.key == val) {
+			resultNode = root;
+			return;
+		}
+		search(root.left, val);
+		search(root.right, val);
 	}
 }
