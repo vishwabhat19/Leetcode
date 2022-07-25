@@ -425,4 +425,18 @@ Return true if and only if the two given trees with head nodes root1 and root2 a
 			return false;
 		return true;
 	}
+
+	/*
+	Given the root node of a binary search tree and two integers low and high, return the sum of values of all nodes with a value in the inclusive range [low, high].
+	 */
+	static int sum = 0;
+	public static int rangeSum(TreeNode root, int low, int high) {
+		if(root == null) return 0;
+		if(root.key >= low && root.key <= high) {
+			sum += root.key;
+		}
+		rangeSum(root.left, low, high);
+		rangeSum(root.right, low, high);
+		return sum;
+	}
 }
