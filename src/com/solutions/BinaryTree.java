@@ -452,6 +452,7 @@ Return true if and only if the two given trees with head nodes root1 and root2 a
 
 	/*
 	530. Minimum Absolute Difference in BST
+	783. Minimum Distance Between BST Nodes
 	 */
 
 	static Integer ans;
@@ -470,5 +471,19 @@ Return true if and only if the two given trees with head nodes root1 and root2 a
 		}
 		prev = curr;
 		inOrder(curr.right);
+	}
+
+	/*
+	235. Lowest Common Ancestor of a Binary Search Tree
+	 */
+
+	public static TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+		if(p.key < root.key && q.key < root.key) {
+			return lowestCommonAncestor(root.left, p, q);
+		}
+		if(p.key > root.key && q.key > root.key) {
+			return lowestCommonAncestor(root.right, p, q);
+		}
+		return root;
 	}
 }
