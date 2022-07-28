@@ -1,9 +1,6 @@
 package com.solutions;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class BinaryTree
 {
@@ -485,5 +482,24 @@ Return true if and only if the two given trees with head nodes root1 and root2 a
 			return lowestCommonAncestor(root.right, p, q);
 		}
 		return root;
+	}
+
+	/*
+	98. Validate Binary Search Tree
+	 */
+	public static boolean isValidBST(TreeNode root) {
+
+		return validate(root,null,null);
+	}
+
+	public static boolean validate(TreeNode root, Integer min, Integer max) {
+		if(root == null) return true;
+
+		else if(max!=null && root.key>=max || min!=null && root.key<=min) {
+			return false;
+		}
+		else {
+			return validate(root.left,min, root.key) && validate(root.right, root.key, max);
+		}
 	}
 }
