@@ -39,7 +39,6 @@ public class BinaryTree
 		tree.root.left.left = new TreeNode(1);
 		tree.root.left.right = new TreeNode(3);
 		searchBST(tree.root, 5);
-		printPreOrder(resultNode);
 		list1.forEach(System.out::println);
 	}
 
